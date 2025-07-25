@@ -1,0 +1,28 @@
+<mat-card class="login-card">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <h2>Login</h2>
+
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" type="email" />
+      <mat-error *ngIf="loginForm.get('email')?.hasError('required')">
+        Email wajib diisi
+      </mat-error>
+      <mat-error *ngIf="loginForm.get('email')?.hasError('email')">
+        Email tidak valid
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Password</mat-label>
+      <input matInput formControlName="password" type="password" />
+      <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+        Password wajib diisi
+      </mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" class="w-full" [disabled]="loginForm.invalid">
+      Login
+    </button>
+  </form>
+</mat-card>

@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, map } from "rxjs";
+import { BehaviorSubject, map, Observable, of } from "rxjs";
 import { Employee } from "../models/employee.model";
 import { HttpClient } from "@angular/common/http";
 
@@ -15,7 +15,7 @@ export class EmployeeService {
         this.loadEmployees();
     }
 
-private loadEmployees() {
+    private loadEmployees() {
         // Coba load dari localStorage dulu
         const savedData = localStorage.getItem(this.storageKey);
         if (savedData) {
@@ -25,7 +25,7 @@ private loadEmployees() {
 
         // Jika tidak ada, load dari JSON
         this.http.get<Employee[]>('assets/data/employees.json').pipe(
-            map(data => 
+            map(data =>
                 data.map(employee => ({
                     ...employee,
                     birthDate: new Date(employee.birthDate).toISOString().split('T')[0],
@@ -48,7 +48,7 @@ private loadEmployees() {
     addEmployee(newEmployee: Omit<Employee, 'id'>) {
         const currentEmployees = this.employees$.getValue();
         const newId = this.generateNewId(currentEmployees);
-        
+
         const employeeToAdd: Employee = {
             ...newEmployee,
             id: newId,
@@ -71,11 +71,52 @@ private loadEmployees() {
 
         const currentEmployees = this.employees$.getValue();
         const updatedEmployees = currentEmployees.filter(employee => employee.id !== id);
+
+        // Update BehaviorSubject dan localStorage
         this.employees$.next(updatedEmployees);
+        this.saveToLocalStorage(updatedEmployees); // <-- Tambahkan ini
+
+        // Optional: Beri feedback
+        console.log('Employee deleted and changes saved to localStorage');
     }
 
     private generateNewId(employees: Employee[]): number {
         const maxId = employees.reduce((max, emp) => Math.max(max, emp.id), 0);
         return Math.max(maxId + 1, 200);
+    }
+
+    getEmployeeById(id: number): Observable<Employee | undefined> {
+        // Cari employee dari BehaviorSubject current value
+        const currentEmployees = this.employees$.getValue();
+        const foundEmployee = currentEmployees.find(e => e.id === id);
+
+        // Jika ditemukan, kembalikan sebagai Observable
+        if (foundEmployee) {
+            return of(foundEmployee);
+        }
+
+        // Jika tidak ditemukan di cache, coba load dari localStorage
+        const savedData = localStorage.getItem(this.storageKey);
+        if (savedData) {
+            const employees: Employee[] = JSON.parse(savedData);
+            const employee = employees.find(e => e.id === id);
+            if (employee) {
+                return of(employee);
+            }
+        }
+
+        // Jika masih tidak ditemukan, kembalikan undefined
+        return of(undefined);
+    }
+
+    updateEmployee(updatedEmployee: Employee) {
+        const currentEmployees = this.employees$.getValue();
+        const updatedEmployees = currentEmployees.map(emp =>
+            emp.id === updatedEmployee.id ? updatedEmployee : emp
+        );
+
+        this.employees$.next(updatedEmployees);
+        this.saveToLocalStorage(updatedEmployees);
+        return of(updatedEmployee); // Return observable untuk handling response
     }
 }

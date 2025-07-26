@@ -94,7 +94,7 @@ export class EmployeeListPage {
     });
 
     // Observe filters
-    this.searchControl.valueChanges.pipe(debounceTime(5000)).subscribe(search => {
+    this.searchControl.valueChanges.pipe(debounceTime(1000)).subscribe(search => {
       this.onQueryChange({ search, page: 1 });
     });
 
@@ -177,8 +177,19 @@ export class EmployeeListPage {
     });
   }
 
-  editEmployee(employee: Employee) {
-    this.router.navigate([`/employees/${employee.id}`]);
+  editEmployee(id: number) {
+    const queryParams = {
+      search: this.searchControl.value,
+      group: this.groupControl.value,
+      status: this.statusControl.value,
+      page: this.page,
+      limit: this.limit
+    };
+
+    this.router.navigate(['/employees/edit', id], {
+      queryParams: queryParams,
+      queryParamsHandling: 'merge'
+    });
   }
 
   deleteEmployee(employee: Employee) {
@@ -220,4 +231,11 @@ export class EmployeeListPage {
   addEmployee() {
     this.router.navigate(['/employees/add']);
   }
+
+  viewEmployeeDetail(id: number) {
+    this.router.navigate(['/employees', id], {
+      queryParamsHandling: 'preserve'
+    });
+  }
+
 }

@@ -1,1 +1,52 @@
-<p>employee-detail works!</p>
+<!-- employee-detail.component.html -->
+<div class="detail-container" *ngIf="employee">
+  <div class="detail-card mat-elevation-z8">
+    <div class="detail-row">
+      <span class="label">Username:</span>
+      <span class="value">{{ employee.username }}</span>
+    </div>
+    
+    <div class="detail-row">
+      <span class="label">Full Name:</span>
+      <span class="value">{{ employee.firstName }} {{ employee.lastName }}</span>
+    </div>
+
+    <div class="detail-row">
+      <span class="label">Email:</span>
+      <span class="value">{{ employee.email }}</span>
+    </div>
+
+    <div class="detail-row">
+      <span class="label">Birth Date:</span>
+      <span class="value">{{ employee.birthDate | date:'longDate' }}</span>
+    </div>
+
+    <div class="detail-row">
+      <span class="label">Salary:</span>
+      <span class="value">{{ employee.basicSalary | currency:'IDR':'symbol':'1.0-0' }}</span>
+    </div>
+
+    <div class="detail-row">
+      <span class="label">Status:</span>
+      <span class="value">
+        <nz-tag [nzColor]="employee.status === 'active' ? 'green' : 'red'">
+          {{ employee.status | uppercase }}
+        </nz-tag>
+      </span>
+    </div>
+
+    <div class="detail-row">
+      <span class="label">Group:</span>
+      <span class="value">{{ employee.group }}</span>
+    </div>
+
+    <div class="detail-row">
+      <span class="label">Description:</span>
+      <span class="value">{{ employee.description | date:'medium' }}</span>
+    </div>
+
+    <div class="actions">
+      <button mat-raised-button color="primary" (click)="backToList()">OK</button>
+    </div>
+  </div>
+</div>

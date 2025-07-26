@@ -1,122 +1,127 @@
 <div class="add-employee-container">
-  <div class="header">
-    <h1>Add New Employee</h1>
-    <button mat-stroked-button (click)="onCancel()">
-      <mat-icon>arrow_back</mat-icon>
-      Back to List
-    </button>
-  </div>
-
-  <form [formGroup]="employeeForm" class="employee-form">
-    <div class="form-row">
-      <mat-form-field appearance="outline">
-        <mat-label>Username</mat-label>
-        <input matInput formControlName="username" required>
-        <mat-error *ngIf="employeeForm.get('username')?.hasError('required')">
-          Username is required
-        </mat-error>
-        <mat-error *ngIf="employeeForm.get('username')?.hasError('minlength')">
-          Username must be at least 3 characters
-        </mat-error>
-        <mat-error *ngIf="employeeForm.get('username')?.hasError('pattern')">
-          Only alphanumeric characters, dots, underscores and hyphens are allowed
-        </mat-error>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label>Email</mat-label>
-        <input matInput formControlName="email" type="email" required>
-        <mat-error *ngIf="employeeForm.get('email')?.hasError('required')">
-          Email is required
-        </mat-error>
-        <mat-error *ngIf="employeeForm.get('email')?.hasError('email') || employeeForm.get('email')?.hasError('pattern')">
-          Please enter a valid email address
-        </mat-error>
-      </mat-form-field>
+    <div class="header">
+        <h2>Add New Employee</h2>
+        <button mat-stroked-button (click)="onCancel()">
+            <mat-icon>arrow_back</mat-icon>
+            Back to List
+        </button>
     </div>
 
-    <div class="form-row">
-      <mat-form-field appearance="outline">
-        <mat-label>First Name</mat-label>
-        <input matInput formControlName="firstName" required>
-        <mat-error *ngIf="employeeForm.get('firstName')?.hasError('required')">
-          First name is required
-        </mat-error>
-        <mat-error *ngIf="employeeForm.get('firstName')?.hasError('pattern')">
-          Only letters and spaces are allowed
-        </mat-error>
-      </mat-form-field>
+    <form [formGroup]="employeeForm" class="employee-form">
+        <div class="form-row">
+            <mat-form-field appearance="outline">
+                <mat-label>Username</mat-label>
+                <input matInput formControlName="username" required>
+                <mat-icon matSuffix>person</mat-icon>
+                <mat-error *ngIf="employeeForm.get('username')?.hasError('required')">
+                    Username is required
+                </mat-error>
+                <mat-error *ngIf="employeeForm.get('username')?.hasError('minlength')">
+                    Username must be at least 3 characters
+                </mat-error>
+                <mat-error *ngIf="employeeForm.get('username')?.hasError('pattern')">
+                    Only alphanumeric characters, dots, underscores and hyphens are allowed
+                </mat-error>
+            </mat-form-field>
 
-      <mat-form-field appearance="outline">
-        <mat-label>Last Name</mat-label>
-        <input matInput formControlName="lastName" required>
-        <mat-error *ngIf="employeeForm.get('lastName')?.hasError('required')">
-          Last name is required
-        </mat-error>
-        <mat-error *ngIf="employeeForm.get('lastName')?.hasError('pattern')">
-          Only letters and spaces are allowed
-        </mat-error>
-      </mat-form-field>
-    </div>
+            <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email" type="email" required>
+                <mat-icon matSuffix>email</mat-icon>
+                <mat-error *ngIf="employeeForm.get('email')?.hasError('required')">
+                    Email is required
+                </mat-error>
+                <mat-error
+                    *ngIf="employeeForm.get('email')?.hasError('email') || employeeForm.get('email')?.hasError('pattern')">
+                    Please enter a valid email address
+                </mat-error>
+            </mat-form-field>
+        </div>
 
-    <div class="form-row">
-      <mat-form-field appearance="outline">
-        <mat-label>Birth Date</mat-label>
-        <input matInput [matDatepicker]="picker" formControlName="birthDate" required>
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-        <mat-error *ngIf="employeeForm.get('birthDate')?.hasError('required')">
-          Birth date is required
-        </mat-error>
-        <mat-error *ngIf="employeeForm.get('birthDate')?.hasError('underage')">
-          Employee must be at least 18 years old
-        </mat-error>
-      </mat-form-field>
+        <div class="form-row">
+            <mat-form-field appearance="outline">
+                <mat-label>First Name</mat-label>
+                <input matInput formControlName="firstName" required>
+                <mat-error *ngIf="employeeForm.get('firstName')?.hasError('required')">
+                    First name is required
+                </mat-error>
+                <mat-error *ngIf="employeeForm.get('firstName')?.hasError('pattern')">
+                    Only letters and spaces are allowed
+                </mat-error>
+            </mat-form-field>
 
-      <mat-form-field appearance="outline">
-        <mat-label>Basic Salary</mat-label>
-        <input matInput formControlName="basicSalary" type="number" required>
-        <span matPrefix>&nbsp;&nbsp;&nbsp;Rp&nbsp;</span>
-        <mat-error *ngIf="employeeForm.get('basicSalary')?.hasError('required')">
-          Basic salary is required
-        </mat-error>
-        <mat-error *ngIf="employeeForm.get('basicSalary')?.hasError('min')">
-          Minimum salary is Rp 1,000,000
-        </mat-error>
-        <mat-error *ngIf="employeeForm.get('basicSalary')?.hasError('max')">
-          Maximum salary is Rp 100,000,000
-        </mat-error>
-      </mat-form-field>
-    </div>
+            <mat-form-field appearance="outline">
+                <mat-label>Last Name</mat-label>
+                <input matInput formControlName="lastName" required>
+                <mat-error *ngIf="employeeForm.get('lastName')?.hasError('required')">
+                    Last name is required
+                </mat-error>
+                <mat-error *ngIf="employeeForm.get('lastName')?.hasError('pattern')">
+                    Only letters and spaces are allowed
+                </mat-error>
+            </mat-form-field>
+        </div>
 
-    <div class="form-row">
-      <mat-form-field appearance="outline">
-        <mat-label>Status</mat-label>
-        <mat-select formControlName="status" required>
-          <mat-option value="active">Active</mat-option>
-          <mat-option value="inactive">Inactive</mat-option>
-        </mat-select>
-        <mat-error *ngIf="employeeForm.get('status')?.hasError('required')">
-          Status is required
-        </mat-error>
-      </mat-form-field>
+        <div class="form-row">
+            <mat-form-field appearance="outline">
+                <mat-label>Birth Date</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="birthDate" required>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="employeeForm.get('birthDate')?.hasError('required')">
+                    Birth date is required
+                </mat-error>
+                <mat-error *ngIf="employeeForm.get('birthDate')?.hasError('underage')">
+                    Employee must be at least 18 years old
+                </mat-error>
+            </mat-form-field>
 
-      <mat-form-field appearance="outline">
-        <mat-label>Group</mat-label>
-        <mat-select formControlName="group" required>
-          <mat-option *ngFor="let group of groups" [value]="group">
-            {{ group }}
-          </mat-option>
-        </mat-select>
-        <mat-error *ngIf="employeeForm.get('group')?.hasError('required')">
-          Group is required
-        </mat-error>
-      </mat-form-field>
-    </div>
+            <mat-form-field appearance="outline">
+                <mat-label>Basic Salary</mat-label>
+                <input matInput formControlName="basicSalary" type="number" required>
+                <span matPrefix>&nbsp;&nbsp;&nbsp;Rp&nbsp;</span>
+                <mat-error *ngIf="employeeForm.get('basicSalary')?.hasError('required')">
+                    Basic salary is required
+                </mat-error>
+                <mat-error *ngIf="employeeForm.get('basicSalary')?.hasError('min')">
+                    Minimum salary is Rp 1,000,000
+                </mat-error>
+                <mat-error *ngIf="employeeForm.get('basicSalary')?.hasError('max')">
+                    Maximum salary is Rp 100,000,000
+                </mat-error>
+            </mat-form-field>
+        </div>
 
-    <div class="form-actions">
-      <button mat-raised-button color="warn" type="button" (click)="onCancel()">Cancel</button>
-      <button mat-raised-button color="primary" type="submit" (click)="onSubmit()">Save Employee</button>
-    </div>
-  </form>
+        <div class="form-row">
+            <mat-form-field appearance="outline">
+                <mat-label>Status</mat-label>
+                <mat-select formControlName="status" required>
+                    <mat-option value="active">Active</mat-option>
+                    <mat-option value="inactive">Inactive</mat-option>
+                </mat-select>
+                <mat-error *ngIf="employeeForm.get('status')?.hasError('required')">
+                    Status is required
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Group</mat-label>
+                <mat-select formControlName="group" required>
+                    <mat-option *ngFor="let group of groups" [value]="group">
+                        {{ group }}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="employeeForm.get('group')?.hasError('required')">
+                    Group is required
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="form-actions">
+            <button mat-raised-button color="warn" type="button" (click)="onCancel()"><mat-icon>cancel</mat-icon>
+                Cancel</button>
+            <button mat-raised-button color="primary" type="submit" (click)="onSubmit()"><mat-icon>save</mat-icon> Save
+                Employee</button>
+        </div>
+    </form>
 </div>

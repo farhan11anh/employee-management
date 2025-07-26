@@ -15,6 +15,7 @@ export const SHARED_ZORRO_MATERIALS = [
     NzSelectModule,
     NzPaginationModule,
     NzButtonModule,
+    NzTagModule
     
     // Add other Ng Zorro modules here as needed
 ]

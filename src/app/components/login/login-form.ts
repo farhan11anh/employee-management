@@ -15,6 +15,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class LoginForm {
   loginForm;
+  showPassword = false;
 
   constructor(
     private fb: FormBuilder,
@@ -27,6 +28,14 @@ export class LoginForm {
     });
   }
 
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+    const passwordField = document.querySelector('[formControlName="password"]') as HTMLInputElement;
+    if (passwordField) {
+      passwordField.type = this.showPassword ? 'text' : 'password';
+    }
+  }
+
   onSubmit() {
     if (this.loginForm.invalid) return;
 
@@ -34,7 +43,7 @@ export class LoginForm {
 
     // Dummy credential check
     if (email === 'admin@example.com' && password === 'admin123') {
-      this.toastr.success('Login berhasil!','', {
+      this.toastr.success('Login berhasil!', '', {
         closeButton: true,
         progressBar: true,
       });
@@ -42,7 +51,7 @@ export class LoginForm {
       // Redirect to employees page after successful login
       this.router.navigate(['/employees']);
     } else {
-      this.toastr.error('Email atau password salah!','', {
+      this.toastr.error('Email atau password salah!', '', {
         closeButton: true,
         progressBar: true,
       });

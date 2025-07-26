@@ -10,11 +10,13 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../../components/confirm-dialog/confirm-dialog';
 import { ToastrService } from 'ngx-toastr';
 import { PaginationComponent } from '../../../components/pagination/pagination.component';
+import { SHARED_ZORRO_MATERIALS } from '../../../shared/shared-zorro-materials';
 
 @Component({
   selector: 'app-employee-list',
   standalone: true,
   imports: [
+    ...SHARED_ZORRO_MATERIALS,
     ...SHARED_MATERIAL_IMPORTS,
     PaginationComponent,
   ],
@@ -58,7 +60,7 @@ export class EmployeeListPage {
   statusControl = new FormControl('');
 
   groups: string[] = ['HR', 'Finance', 'IT', 'Marketing', 'Customer Service'];
-  statuses: string[] = ['Active', 'Inactive'];
+  statuses: string[] = ['active', 'inactive'];
 
 
   constructor(

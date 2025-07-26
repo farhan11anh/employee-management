@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { SHARED_MATERIAL_IMPORTS } from '../../shared/shared-material';
+import { SHARED_ZORRO_MATERIALS } from '../../shared/shared-zorro-materials';
 
 @Component({
   selector: 'app-pagination',
@@ -7,7 +8,8 @@ import { SHARED_MATERIAL_IMPORTS } from '../../shared/shared-material';
   styleUrls: ['./pagination.component.scss'],
   standalone: true,
   imports: [
-    ...SHARED_MATERIAL_IMPORTS
+    ...SHARED_MATERIAL_IMPORTS,
+    ...SHARED_ZORRO_MATERIALS
   ]
 })
 export class PaginationComponent {

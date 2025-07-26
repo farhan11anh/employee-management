@@ -130,3 +130,11 @@ table {
   padding: 16px;
 }
 
+.status-tag {
+  border-radius: 16px !important;
+  padding: 0 8px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+

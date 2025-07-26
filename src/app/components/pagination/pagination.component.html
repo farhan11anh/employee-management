@@ -1,4 +1,4 @@
-<div class="pagination-wrapper">
+<!-- <div class="pagination-wrapper">
   <div class="pagination-container">
     <button mat-icon-button (click)="onPrevious()" [disabled]="page === 1">
       <mat-icon>chevron_left</mat-icon>
@@ -19,7 +19,7 @@
     </button>
   </div>
 
-  <!-- Rows per page selector -->
+
   <mat-form-field appearance="outline" class="limit-selector">
     <mat-label>Rows per page</mat-label>
     <mat-select [value]="limit" (selectionChange)="onLimitChange($event)">
@@ -29,3 +29,47 @@
     </mat-select>
   </mat-form-field>
 </div> 
+
+ -->
+
+<div class="pagination-container">
+  <!-- Pagination Controls -->
+  <div class="pagination-controls">
+    <!-- Previous Button -->
+    <button mat-icon-button (click)="onPrevious()" [disabled]="page === 1" aria-label="Previous page">
+      <mat-icon>chevron_left</mat-icon>
+    </button>
+
+    <!-- Page Numbers - Hidden on mobile -->
+    <div class="page-numbers">
+      <button mat-button
+              *ngFor="let p of visiblePages"
+              [color]="p === page ? 'primary' : undefined"
+              class="page-button"
+              (click)="changePage(p)"
+              [disabled]="p === page || p === -1">
+        {{ p === -1 ? '...' : p }}
+      </button>
+    </div>
+
+    <!-- Current Page Info - Visible only on mobile -->
+    <div class="current-page-mobile">
+      <span>{{ page }} of {{ totalPages }}</span>
+    </div>
+
+    <!-- Next Button -->
+    <button mat-icon-button (click)="onNext()" [disabled]="page === totalPages" aria-label="Next page">
+      <mat-icon>chevron_right</mat-icon>
+    </button>
+  </div>
+
+  <!-- Items Per Page Selector -->
+  <mat-form-field appearance="outline" class="items-per-page">
+    <mat-label>Items per page</mat-label>
+    <mat-select [value]="limit" (selectionChange)="onLimitChange($event)">
+      <mat-option *ngFor="let option of [5, 10, 20, 50]" [value]="option">
+        {{ option }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

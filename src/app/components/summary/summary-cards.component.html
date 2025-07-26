@@ -1,0 +1,64 @@
+<div class="summary-container">
+  <!-- Card 1: Total Employees -->
+  <mat-card class="summary-card">
+    <div class="card-content">
+      <mat-icon class="card-icon">people_outline</mat-icon>
+      <div class="card-text">
+        <h3 class="card-title">Total Employees</h3>
+        <p class="card-value">{{ stats.totalEmployees }}</p>
+      </div>
+    </div>
+    <mat-progress-bar mode="determinate" [value]="100"></mat-progress-bar>
+  </mat-card>
+
+  <!-- Card 2: Active Employees -->
+  <mat-card class="summary-card accent">
+    <div class="card-content">
+      <mat-icon class="card-icon">check_circle_outline</mat-icon>
+      <div class="card-text">
+        <h3 class="card-title">Active Employees</h3>
+        <p class="card-value">
+          {{ stats.activeEmployees }} 
+          <span class="card-percent">({{ (stats.activeEmployees/stats.totalEmployees) | percent }})</span>
+        </p>
+      </div>
+    </div>
+    <mat-progress-bar 
+      mode="determinate" 
+      [value]="(stats.activeEmployees/stats.totalEmployees)*100"
+      color="accent">
+    </mat-progress-bar>
+  </mat-card>
+
+  <!-- Card 3: Departments -->
+  <mat-card class="summary-card warn">
+    <div class="card-content">
+      <mat-icon class="card-icon">business</mat-icon>
+      <div class="card-text">
+        <h3 class="card-title">Departments</h3>
+        <p class="card-value">{{ stats.departments.length }}</p>
+      </div>
+    </div>
+    <mat-progress-bar 
+      mode="determinate" 
+      [value]="(stats.departments.length/10)*100" 
+      color="warn">
+    </mat-progress-bar>
+  </mat-card>
+
+  <!-- Card 4: Average Salary -->
+  <mat-card class="summary-card primary">
+    <div class="card-content">
+      <mat-icon class="card-icon">attach_money</mat-icon>
+      <div class="card-text">
+        <h3 class="card-title">Avg. Salary</h3>
+        <p class="card-value">{{ stats.avgSalary | currency:'IDR':'symbol':'1.0-0' }}</p>
+      </div>
+    </div>
+    <mat-progress-bar 
+      mode="determinate" 
+      [value]="(stats.avgSalary/20000000)*100" 
+      color="primary">
+    </mat-progress-bar>
+  </mat-card>
+</div>

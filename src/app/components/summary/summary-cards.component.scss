@@ -1,0 +1,95 @@
+.summary-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.summary-card {
+  padding: 1rem;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  }
+
+  .card-content {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    .card-icon {
+      font-size: 2.5rem;
+      width: 2.5rem;
+      height: 2.5rem;
+      margin-right: 1rem;
+      color: rgba(0, 0, 0, 0.54);
+    }
+
+    .card-text {
+      .card-title {
+        margin: 0;
+        font-size: 1rem;
+        color: rgba(0, 0, 0, 0.6);
+      }
+
+      .card-value {
+        margin: 0.25rem 0 0;
+        font-size: 1.75rem;
+        font-weight: 500;
+        color: rgba(0, 0, 0, 0.87);
+      }
+
+      .card-percent {
+        font-size: 0.875rem;
+        color: rgba(0, 0, 0, 0.54);
+      }
+    }
+  }
+
+  mat-progress-bar {
+    height: 4px;
+    border-radius: 2px;
+  }
+
+  // Warna khusus untuk card
+  &.accent {
+    .card-icon, .card-value {
+      color: #4caf50; // Warna hijau untuk active
+    }
+  }
+
+  &.warn {
+    .card-icon, .card-value {
+      color: #ff9800; // Warna orange untuk departments
+    }
+  }
+
+  &.primary {
+    .card-icon, .card-value {
+      color: #2196f3; // Warna biru untuk salary
+    }
+  }
+}
+
+.recent-table {
+  margin-top: 2rem;
+  padding: 1rem;
+
+  h3 {
+    margin: 0 0 1rem;
+    font-size: 1.25rem;
+    color: rgba(0, 0, 0, 0.87);
+  }
+
+  table {
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .summary-container {
+    grid-template-columns: 1fr;
+  }
+}

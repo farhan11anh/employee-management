@@ -119,4 +119,29 @@ export class EmployeeService {
         this.saveToLocalStorage(updatedEmployees);
         return of(updatedEmployee); // Return observable untuk handling response
     }
+
+    getStatistics() {
+    const employees = this.employees$.getValue();
+    const total = employees.length;
+    const active = employees.filter(e => e.status === 'active').length;
+    const departments = [...new Set(employees.map(e => e.group))];
+    const avgSalary = employees.reduce((sum, emp) => sum + emp.basicSalary, 0) / total;
+
+    return {
+      totalEmployees: total,
+      activeEmployees: active,
+      departments: departments,
+      avgSalary: avgSalary || 0
+    };
+  }
+
+  getRecentEmployees(count: number = 5) {
+    return this.employees$.pipe(
+      map(employees => 
+        employees
+          .sort((a, b) => new Date(b.description).getTime() - new Date(a.description).getTime())
+          .slice(0, count)
+      )
+    );
+  }
 }

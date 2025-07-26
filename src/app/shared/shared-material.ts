@@ -25,6 +25,7 @@ import { MatListModule } from '@angular/material/list';
 import { RouterModule } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 export const SHARED_MATERIAL_IMPORTS = [
   // Core
@@ -58,5 +59,6 @@ export const SHARED_MATERIAL_IMPORTS = [
   MatListModule,
   MatFormFieldModule,
   MatChipsModule,
-  MatOptionModule
+  MatOptionModule,
+  MatProgressBarModule
 ];

@@ -1,0 +1,121 @@
+.not-found-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  padding: 2rem;
+  text-align: center;
+
+  .error-content {
+    max-width: 600px;
+    width: 100%;
+
+    .error-image {
+      margin-bottom: 2rem;
+      
+      svg {
+        width: 300px;
+        height: auto;
+        max-width: 100%;
+        
+        circle {
+          animation: pulse 2s infinite alternate;
+        }
+      }
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #343a40;
+    }
+
+    .error-description {
+      font-size: 1.1rem;
+      color: #6c757d;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .action-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+
+      button {
+        min-width: 200px;
+      }
+    }
+
+    .extra-features {
+      margin-top: 3rem;
+
+      .search-box {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto 2rem;
+      }
+
+      .popular-links {
+        h3 {
+          font-size: 1.2rem;
+          margin-bottom: 1rem;
+          color: #495057;
+        }
+
+        ul {
+          list-style: none;
+          padding: 0;
+          display: flex;
+          justify-content: center;
+          gap: 1.5rem;
+          flex-wrap: wrap;
+
+          li a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+
+            &:hover {
+              color: #0056b3;
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 600px) {
+  .not-found-container {
+    padding: 1rem;
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    .action-buttons {
+      flex-direction: column;
+      
+      button {
+        width: 100%;
+      }
+    }
+  }
+}

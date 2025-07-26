@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { SHARED_MATERIAL_IMPORTS } from '../../shared/shared-material';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login-form',
@@ -17,10 +18,11 @@ export class LoginForm {
 
   constructor(
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {
     this.loginForm = this.fb.group({
-      email: ['', Validators.required, Validators.email],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
   }
@@ -32,10 +34,18 @@ export class LoginForm {
 
     // Dummy credential check
     if (email === 'admin@example.com' && password === 'admin123') {
-      alert('Login berhasil!');
+      this.toastr.success('Login berhasil!','', {
+        closeButton: true,
+        progressBar: true,
+      });
+      localStorage.setItem('token', '999999'); // Simulate token storage
+      // Redirect to employees page after successful login
       this.router.navigate(['/employees']);
     } else {
-      alert('Email atau password salah!');
+      this.toastr.error('Email atau password salah!','', {
+        closeButton: true,
+        progressBar: true,
+      });
     }
   }
 }

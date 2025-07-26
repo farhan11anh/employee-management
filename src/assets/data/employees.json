@@ -1,0 +1,28 @@
+[
+  {
+    "employee": {
+      "username": "andi.n",
+      "firstName": "Andi",
+      "lastName": "Nugroho",
+      "email": "andi@mail.com",
+      "birthDate": "1990-01-01T00:00:00",
+      "basicSalary": 11000000,
+      "status": "active",
+      "group": "IT",
+      "description": "2024-07-10T15:30:00"
+    }
+  },
+  {
+    "employee": {
+      "username": "siti.a",
+      "firstName": "Siti",
+      "lastName": "Aminah",
+      "email": "siti@mail.com",
+      "birthDate": "1992-03-14T00:00:00",
+      "basicSalary": 9500000,
+      "status": "active",
+      "group": "HR",
+      "description": "2024-07-09T09:15:00"
+    }
+  }
+]

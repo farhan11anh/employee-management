@@ -20,12 +20,16 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { RouterModule } from '@angular/router';
 
 export const SHARED_MATERIAL_IMPORTS = [
   // Core
   CommonModule,
   FormsModule,
   ReactiveFormsModule,
+  RouterModule,
 
   // Material UI components
   MatInputModule,
@@ -47,4 +51,7 @@ export const SHARED_MATERIAL_IMPORTS = [
   MatMenuModule,
   MatCheckboxModule,
   MatRadioModule,
+  MatSidenavModule,
+  MatToolbarModule,
+  MatListModule,
 ];

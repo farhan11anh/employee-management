@@ -52,7 +52,7 @@ export class EmployeeListPage {
 
   // Query
   search = '';
-  sort = 'firstName';
+  sort = '';
   order: 'asc' | 'desc' = 'asc';
 
   searchControl = new FormControl('');
@@ -83,7 +83,7 @@ export class EmployeeListPage {
       // Ambil dari URL
       this.page = +params['page'] || 1;
       this.limit = +params['limit'] || 5;
-      this.sort = params['sort'] || 'firstName';
+      this.sort = params['sort'] || '';
       this.order = params['order'] || 'asc';
 
       this.searchControl.setValue(params['search'] || '', { emitEvent: false });
@@ -217,5 +217,7 @@ export class EmployeeListPage {
     this.onQueryChange({ sort: field, order: newOrder, page: 1 });
   }
 
-
+  addEmployee() {
+    this.router.navigate(['/employees/add']);
+  }
 }

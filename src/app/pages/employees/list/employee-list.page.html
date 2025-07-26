@@ -22,6 +22,14 @@
     </mat-form-field>
 </div>
 
+<div class="table-header">
+  <h2>Employee List</h2>
+  <button mat-raised-button color="primary" (click)="addEmployee()">
+    <mat-icon>add</mat-icon>
+    Add Employee
+  </button>
+</div>
+
 <!-- Container untuk tabel dengan scroll horizontal -->
 <div class="table-container">
     <table mat-table [dataSource]="filteredEmployees" class="mat-elevation-z8" multiTemplateDataRows>

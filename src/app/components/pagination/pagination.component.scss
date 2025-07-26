@@ -1,0 +1,28 @@
+.pagination-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.pagination-container {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 300px;
+  flex-wrap: wrap;
+}
+
+.page-button {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  padding: 0;
+  flex: 0 0 40px;
+}
+
+.limit-selector {
+  width: 150px;
+}
+

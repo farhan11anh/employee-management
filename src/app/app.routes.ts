@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { LoginPage } from './auth/login/login.page';
 import { authGuard } from './auth/guards/auth.guard';
 import { DashboardLayoutComponent } from './layout/dashboard-layout.component';
+import { LayoutComponent } from './layout/layout.component';
 // import { EmployeeAddPage } from './pages/employees/add/employee-add.page';
 // import { EmployeeDetailPage } from './pages/employees/detail/employee-detail.page';
 

@@ -1,0 +1,132 @@
+.badge {
+  padding: 0.25rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: white;
+  display: inline-block;
+}
+
+.badge-success {
+  background-color: #4caf50;
+}
+
+.badge-danger {
+  background-color: #f44336;
+}
+
+.text-center {
+  text-align: center;
+}
+
+table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+th.mat-header-cell,
+td.mat-cell {
+  white-space: normal;       /* agar bisa wrap */
+  word-wrap: break-word;     /* untuk potong kata panjang */
+  overflow-wrap: break-word; /* fallback tambahan */
+  vertical-align: top;
+}
+
+th.mat-header-cell, td.mat-cell {
+  padding: 8px 16px;
+}
+
+th.mat-header-cell.username,
+td.mat-cell.username {
+  width: 120px;
+}
+
+th.mat-header-cell.name,
+td.mat-cell.name {
+  width: 180px;
+}
+
+th.mat-header-cell.email,
+td.mat-cell.email {
+  width: 220px;
+}
+
+th.mat-header-cell.birthDate,
+td.mat-cell.birthDate {
+  width: 140px;
+}
+
+th.mat-header-cell.basicSalary,
+td.mat-cell.basicSalary {
+  width: 150px;
+}
+
+th.mat-header-cell.group,
+td.mat-cell.group {
+  width: 120px;
+}
+
+th.mat-header-cell.status,
+td.mat-cell.status {
+  width: 100px;
+}
+
+th.mat-header-cell.actions,
+td.mat-cell.actions {
+  width: 100px;
+  text-align: center;
+}
+
+/* styles.css atau komponen CSS Anda */
+.table-container {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; /* Untuk scroll yang smooth di iOS */
+  margin-bottom: 1rem;
+  border-radius: 4px;
+  background-color: white;
+}
+
+table {
+  width: 100%;
+  min-width: 600px; /* Atur lebar minimum sesuai kebutuhan kolom Anda */
+}
+
+/* Untuk tampilan mobile */
+@media (max-width: 768px) {
+  .filters {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .filters mat-form-field {
+    width: 100%;
+  }
+  
+  .table-container {
+    border: 1px solid #e0e0e0;
+  }
+}
+
+/* Style untuk badge status */
+.badge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.badge-success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.badge-danger {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.text-center {
+  text-align: center;
+  padding: 16px;
+}
+

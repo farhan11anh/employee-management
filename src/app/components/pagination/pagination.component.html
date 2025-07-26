@@ -1,0 +1,31 @@
+<div class="pagination-wrapper">
+  <div class="pagination-container">
+    <button mat-icon-button (click)="onPrevious()" [disabled]="page === 1">
+      <mat-icon>chevron_left</mat-icon>
+    </button>
+
+    <button mat-button
+            *ngFor="let p of visiblePages"
+            [color]="p === page ? 'primary' : undefined"
+            class="page-button"
+            (click)="changePage(p)"
+            [disabled]="p === page"
+            >
+      {{ p === -1 ? '...' : p }}
+    </button>
+
+    <button mat-icon-button (click)="onNext()" [disabled]="page === totalPages">
+      <mat-icon>chevron_right</mat-icon>
+    </button>
+  </div>
+
+  <!-- Rows per page selector -->
+  <mat-form-field appearance="outline" class="limit-selector">
+    <mat-label>Rows per page</mat-label>
+    <mat-select [value]="limit" (selectionChange)="onLimitChange($event)">
+      <mat-option *ngFor="let option of [5, 10, 20, 50]" [value]="option">
+        {{ option }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div> 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit, DoCheck, OnChanges, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -18,11 +18,12 @@ import { EmployeeService } from '../../../core/services/employee.service';
         ...SHARED_ZORRO_MATERIALS
     ]
 })
-export class EmployeeEditComponent implements OnInit {
+export class EmployeeEditComponent implements OnInit, OnDestroy, AfterViewInit, DoCheck {
     employeeForm!: FormGroup;
     employeeId!: number;
     groups = ['IT', 'Finance', 'HR', 'Marketing', 'Customer Service'];
     isLoading = false;
+    private formChangesSubscription: any;
 
     constructor(
         private fb: FormBuilder,
@@ -35,9 +36,29 @@ export class EmployeeEditComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        console.log('ngOnInit called');
         this.employeeId = +this.route.snapshot.paramMap.get('id')!;
         this.initForm();
         this.loadEmployeeData();
+
+        // Subscribe to form value changes
+        this.formChangesSubscription = this.employeeForm.valueChanges.subscribe(values => {
+            console.log('Form values changed:', values);
+        });
+    }
+
+    ngDoCheck() {
+        console.log('ngDoCheck called - change detection cycle');
+    }
+
+    ngAfterViewInit() {
+        console.log('ngAfterViewInit called - view initialized');
+    }
+
+    ngOnDestroy() {
+        if (this.formChangesSubscription) {
+            this.formChangesSubscription.unsubscribe();
+        }
     }
 
     initForm() {

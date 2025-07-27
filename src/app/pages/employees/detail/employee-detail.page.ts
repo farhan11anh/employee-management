@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit, OnChanges, SimpleChanges, DoCheck } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Employee } from '../../../core/models/employee.model';
@@ -15,9 +15,10 @@ import { SHARED_ZORRO_MATERIALS } from '../../../shared/shared-zorro-materials';
   templateUrl: './employee-detail.page.html',
   styleUrl: './employee-detail.page.css'
 })
-export class EmployeeDetailPage {
+export class EmployeeDetailPage implements OnInit, OnDestroy, AfterViewInit, DoCheck {
   employee: Employee | undefined;
   previousQueryParams: any = {};
+  private routeSub: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -27,16 +28,34 @@ export class EmployeeDetailPage {
   ) { }
 
   ngOnInit() {
+    console.log('ngOnInit called');
     const id = +this.route.snapshot.paramMap.get('id')!;
     this.previousQueryParams = this.route.snapshot.queryParams;
 
     this.employeeService.getEmployees().subscribe(employees => {
       this.employee = employees.find(e => e.id === id);
     });
+
+    this.routeSub = this.route.params.subscribe(params => {
+      console.log('Route params changed:', params);
+    });
+  }
+
+  ngDoCheck() {
+    console.log('ngDoCheck called - change detection cycle');
+  }
+
+  ngAfterViewInit() {
+    console.log('ngAfterViewInit called - view initialized');
+  }
+
+  ngOnDestroy() {
+    if (this.routeSub) {
+      this.routeSub.unsubscribe();
+    }
   }
 
   backToList() {
-    // Navigasi kembali dengan membawa query params sebelumnya
     this.router.navigate(['/employees'], {
       queryParams: this.previousQueryParams
     });

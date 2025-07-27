@@ -1,22 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EmployeeService } from '../../../core/services/employee.service';
 import { SHARED_MATERIAL_IMPORTS } from '../../../shared/shared-material';
 import { ToastrService } from 'ngx-toastr';
 import { Location } from '@angular/common';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-employee-add',
+  standalone: true,
   imports: [
     ...SHARED_MATERIAL_IMPORTS
   ],
   templateUrl: './employee-add.page.html',
   styleUrl: './employee-add.page.css'
 })
-export class EmployeeAddPage {
+export class EmployeeAddPage implements OnInit, OnDestroy {
   employeeForm: FormGroup;
   groups = ['IT', 'Finance', 'HR', 'Marketing', 'Customer Service'];
+  private formSubscription!: Subscription;
 
   constructor(
     private fb: FormBuilder,
@@ -25,15 +28,31 @@ export class EmployeeAddPage {
     private toastr: ToastrService,
     private location: Location
   ) {
-    this.employeeForm = this.fb.group({
+    this.employeeForm = this.createForm();
+  }
+
+  ngOnInit() {
+    this.formSubscription = this.employeeForm.valueChanges.subscribe(() => {
+      // Optional: Add any form change tracking logic here
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.formSubscription) {
+      this.formSubscription.unsubscribe();
+    }
+  }
+
+  private createForm(): FormGroup {
+    return this.fb.group({
       username: ['', [
         Validators.required,
         Validators.minLength(3),
-        Validators.pattern(/^[a-zA-Z0-9._-]+$/) // Hanya karakter alfanumerik dan beberapa simbol
+        Validators.pattern(/^[a-zA-Z0-9._-]+$/)
       ]],
       firstName: ['', [
         Validators.required,
-        Validators.pattern(/^[a-zA-Z ]+$/) // Hanya huruf dan spasi
+        Validators.pattern(/^[a-zA-Z ]+$/)
       ]],
       lastName: ['', [
         Validators.required,
@@ -46,34 +65,31 @@ export class EmployeeAddPage {
       ]],
       birthDate: ['', [
         Validators.required,
-        this.ageValidator(18) // Minimal usia 18 tahun
+        this.ageValidator(18)
       ]],
       basicSalary: ['', [
         Validators.required,
-        Validators.min(1000000), // Minimal gaji 1 juta
-        Validators.max(100000000) // Maksimal gaji 100 juta
+        Validators.min(1000000),
+        Validators.max(100000000)
       ]],
       status: ['active', Validators.required],
       group: ['', Validators.required]
     });
   }
 
-  // Custom validator untuk usia minimal
   ageValidator(minAge: number) {
     return (control: any) => {
-      if (!control.value) {
-        return null;
-      }
-
+      if (!control.value) return null;
+      
       const birthDate = new Date(control.value);
       const today = new Date();
       let age = today.getFullYear() - birthDate.getFullYear();
       const monthDiff = today.getMonth() - birthDate.getMonth();
-
+      
       if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
         age--;
       }
-
+      
       return age >= minAge ? null : { underage: { minAge } };
     };
   }
@@ -88,7 +104,7 @@ export class EmployeeAddPage {
       });
       this.employeeForm.reset();
       setTimeout(() => {
-        this.location.back(); // Kembali tanpa reload
+        this.location.back();
       }, 100);
     } else {
       this.toastr.error('Please fill out the form correctly.', 'Error', {
@@ -100,7 +116,6 @@ export class EmployeeAddPage {
     }
   }
 
-  // Mark semua field sebagai touched untuk menampilkan error
   private markFormGroupTouched(formGroup: FormGroup) {
     Object.values(formGroup.controls).forEach(control => {
       control.markAsTouched();
